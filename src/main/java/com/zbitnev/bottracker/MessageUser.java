@@ -1,3 +1,5 @@
+package com.zbitnev.bottracker;
+
 public class MessageUser {
     private Long chatID;
     private String messageID;

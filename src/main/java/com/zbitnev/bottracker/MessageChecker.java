@@ -1,3 +1,5 @@
+package com.zbitnev.bottracker;
+
 import java.io.*;
 import java.util.Properties;
 import java.util.Set;
