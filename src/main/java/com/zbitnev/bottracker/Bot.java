@@ -9,6 +9,7 @@ import java.security.GeneralSecurityException;
 
 public class Bot extends TelegramLongPollingBot {
 
+
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
@@ -20,7 +21,23 @@ public class Bot extends TelegramLongPollingBot {
 
             if (messageCheck.isMagnetLink(update.getMessage().getText())) {
                 ClientConnection clientConnection = new ClientConnection();
-                clientConnection.getConnection(messageFromChatID);
+//                clientConnection.getConnection(messageFromChatID.getBytes());
+                MessageCipher cipherTest = new MessageCipher();
+
+                try {
+                    String messageForCipher = chatID + messageFromChatID;
+
+                    byte [] messageCiphering = cipherTest.getCipher(messageForCipher.getBytes());
+
+                    clientConnection.getConnection(messageCiphering);
+                    System.out.println("chatID = " + chatID);
+                    System.out.println("messageFromChatID = " + messageFromChatID);
+                    MessageCipher.printByteArr(messageCiphering);
+
+                } catch (GeneralSecurityException e) {
+                    e.printStackTrace();
+                }
+
 
                 message.setChatId(chatID).setText("Message sent on server");
 
