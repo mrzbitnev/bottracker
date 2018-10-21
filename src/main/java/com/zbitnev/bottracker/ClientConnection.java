@@ -6,12 +6,12 @@ import java.io.IOException;
 import java.net.Socket;
 
 public class ClientConnection {
-    boolean getConnection(byte[] magnetLink) {
+    boolean getConnection(String magnetLink) {
         try (Socket socket = new Socket("localhost", 8675);
              DataOutputStream oos = new DataOutputStream(socket.getOutputStream());
              DataInputStream ois = new DataInputStream(socket.getInputStream())) {
 
-            oos.write(magnetLink);
+            oos.writeUTF(magnetLink);
             oos.flush();
             System.out.println("Clien sent message " + magnetLink);
 

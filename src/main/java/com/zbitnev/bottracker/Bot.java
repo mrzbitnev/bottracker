@@ -19,17 +19,11 @@ public class Bot extends TelegramLongPollingBot {
             SendMessage message = new SendMessage();
 
             if (messageCheck.isMagnetLink(update.getMessage().getText())) {
-                MessageCipher cipherTest = new MessageCipher();
                 ClientConnection clientConnection = new ClientConnection();
+                clientConnection.getConnection(messageFromChatID);
 
-                try {
-                    cipherTest.getCipher(chatID + messageFromChatID);
-                    clientConnection.getConnection(cipherTest.getCipher(chatID + messageFromChatID));
-                    message.setChatId(chatID).setText("Message sent on server");
+                message.setChatId(chatID).setText("Message sent on server");
 
-                } catch (GeneralSecurityException e) {
-                    e.printStackTrace();
-                }
             } else {
                 message.setChatId(chatID).setText("We have a problem");
             }
